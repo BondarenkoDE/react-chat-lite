@@ -7,12 +7,9 @@ const server = require('http').createServer(app); //создание серве�
 //теперь сервер рарботает через наше веб-приложение, через переменную app
 const io = require('socket.io')(server, { cors: { origin: '*' } }); //подключение сокетов к серверу
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
-});
-app.use(express.static('../build'));
+app.use(express.static('build'));
 app.use(express.json()); //посредник, который будет получать в теле самого запроса json данные
 
 const rooms = new Map(); //типа БД
