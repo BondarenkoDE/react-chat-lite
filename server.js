@@ -10,9 +10,9 @@ const io = require('socket.io')(server, { cors: { origin: '*' } }); //подкл
 const PORT = process.env.PORT || 3001;
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
-
+app.use(express.static('../build'));
 app.use(express.json()); //посредник, который будет получать в теле самого запроса json данные
 
 const rooms = new Map(); //типа БД
