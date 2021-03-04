@@ -9,7 +9,7 @@ const io = require('socket.io')(server, { cors: { origin: '*' } }); //подкл
 
 const PORT = process.env.PORT || 3002;
 
-app.use(express.static('build'));
+app.use(express.static('./build'));
 app.use(express.json()); //посредник, который будет получать в теле самого запроса json данные
 
 const rooms = new Map(); //типа БД
