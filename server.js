@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 
 const app = express(); //создание приложения express
@@ -5,6 +6,12 @@ const server = require('http').createServer(app); //создание серве�
 //говорим, что хотим просто создать http-сервер
 //теперь сервер рарботает через наше веб-приложение, через переменную app
 const io = require('socket.io')(server, { cors: { origin: '*' } }); //подключение сокетов к серверу
+
+const PORT = process.env.PORT || 3001;
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.use(express.json()); //посредник, который будет получать в теле самого запроса json данные
 
@@ -66,7 +73,7 @@ io.on('connection', (socket) => {
   // console.log('user connected', socket.id);
 });
 
-server.listen(9999, (error) => {
+server.listen(PORT, (error) => {
   if (error) {
     throw Error(error);
   }
